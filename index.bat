@@ -1,0 +1,1 @@
+ant -f lucene/demo/build.xml -Ddocs=lucene/demo/data/wiki-small/en/articles/ run-indexing-demo

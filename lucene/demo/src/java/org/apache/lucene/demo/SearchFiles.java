@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 
@@ -86,8 +87,8 @@ public class SearchFiles {
         i++;
       }
     }
-    
-    IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(index)));
+    Path path = Paths.get(index);
+    IndexReader reader = DirectoryReader.open(FSDirectory.open(path));
     IndexSearcher searcher = new IndexSearcher(reader);
     Analyzer analyzer = new StandardAnalyzer();
 

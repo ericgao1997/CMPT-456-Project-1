@@ -1,0 +1,1 @@
+ant -f lucene/demo/build.xml run-search-index-demo
