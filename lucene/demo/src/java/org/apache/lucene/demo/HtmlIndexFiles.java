@@ -51,19 +51,20 @@ public class HtmlIndexFiles {
    */
   public static void main(String[] args) throws Exception {
     //Args should be either a path to a document or a folder with documents to parse.
+    String docsPath;
     if (args.length != 1) {
-      System.err.println("BADDDDDD USAGEEEEEEE");
+      docsPath = "lucene/demo/data/wiki-small/en/articles/";
     }else {
-      String docsPath = args[0];
-      Directory indxDir = FSDirectory.open(Paths.get("index"));
-      Analyzer analyzer = new StandardAnalyzer();
-      IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
-      IndexWriter writer = new IndexWriter(indxDir, iwc);
-      
-      final Path docDir = Paths.get(docsPath);
-      parseDocs(writer,docDir);
-      System.out.println("Done");
+      docsPath = args[0];
     }
+    Directory indxDir = FSDirectory.open(Paths.get("index"));
+    Analyzer analyzer = new StandardAnalyzer();
+    IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
+    IndexWriter writer = new IndexWriter(indxDir, iwc);
+    
+    final Path docDir = Paths.get(docsPath);
+    parseDocs(writer,docDir);
+    System.out.println("Done");
   }
   
   static public void parseDoc(IndexWriter writer, Path file) throws Exception {

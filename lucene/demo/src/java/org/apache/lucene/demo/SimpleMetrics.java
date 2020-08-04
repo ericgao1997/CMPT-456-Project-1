@@ -32,8 +32,6 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
-import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.FSDirectory;
 
 public class SimpleMetrics {
@@ -117,11 +115,10 @@ public class SimpleMetrics {
       System.out.println("Searching for: " + query.toString(field));
       int num = searcher.count(query);
       System.out.println("There are: "+Integer.toString(num)+ " documents matching the query");
-      TopDocs topDocs = searcher.search(query, num);
-      ScoreDoc[] hits = topDocs.scoreDocs;
-      long tScore = searcher.collectionStatistics(query.toString()).sumTotalTermFreq();
+      if (num == 0) {
+        continue;
+      }
       Term termInstance = new Term("contents", line); 
-      System.out.println(reader.docFreq(termInstance));
       System.out.println("The total term frequency for the query is "+ reader.totalTermFreq(termInstance));
       if (queryString != null) {
         break;
